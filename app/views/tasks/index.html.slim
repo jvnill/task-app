@@ -1,0 +1,6 @@
+h1 Tasks
+= link_to 'New', [:new, :task], data: { turbo_frame: 'task-form' }
+
+= turbo_frame_tag 'task-form'
+
+ul = render @tasks
