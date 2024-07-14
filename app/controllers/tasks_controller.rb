@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: %i[edit update destroy]
+  before_action :find_task, only: %i[edit update destroy finish]
 
   def index
-    @pagy, @tasks = pagy(Task.order(id: :desc))
+    @pagy, @tasks = pagy(Task.order_recently.unfinished)
   end
 
   def new
@@ -30,6 +30,10 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
+  end
+
+  def finish
+    @task.update!(finished: true)
   end
 
   private

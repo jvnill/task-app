@@ -1,6 +1,9 @@
 = turbo_frame_tag task do
-  .row
+  .row data-controller='task' data-task-updated-url='#{task_path(task)}'
     .col-1
+      = form_with model: task, url: [:finish, task], method: :put, data: { controller: 'task' } do |f|
+        = f.label :finished do
+          = f.check_box :finished, data: { action: 'task#finishTask' }
 
     .col-6
       h5 = task.title
