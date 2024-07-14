@@ -1,6 +1,13 @@
 = turbo_frame_tag task do
-  li
-    = task.title
-    = task.subtitle
-    = task.priority
-    = task.due_date
+  .row
+    .col-2
+
+    .col-4
+      h5 = task.title
+      .text-secondary = task.subtitle
+
+    .col-3
+      = priority_rendering(task.priority)
+
+    .col-3
+      = task.due_date
