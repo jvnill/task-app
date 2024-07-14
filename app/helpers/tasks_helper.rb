@@ -10,6 +10,6 @@ module TasksHelper
   end
 
   def validation_text(record, attr)
-    content_tag(:div, record.errors[attr].to_sentence, class: 'invalid-feedback')
+    content_tag(:div, record.errors[attr].to_sentence, class: 'error')
   end
 end

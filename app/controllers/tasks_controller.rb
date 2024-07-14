@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :find_task, only: %i[edit update destroy]
 
   def index
-    @pagy, @tasks = pagy(Task.all)
+    @pagy, @tasks = pagy(Task.order(id: :desc))
   end
 
   def new
@@ -12,9 +12,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    if @task.save
-      redirect_to tasks_path
-    else
+    unless @task.save
       render :new, status: :unprocessable_entity
     end
   end
@@ -24,8 +22,9 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
+      render @task
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

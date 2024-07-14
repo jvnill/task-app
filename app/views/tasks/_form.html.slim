@@ -1,22 +1,20 @@
 = form_with model: task do |f|
-  .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
-    = validation_text(task, :title)
+  .row
+    .col-7.offset-1
+      = f.text_field :title, class: 'form-control', placeholder: 'Title'
+      = validation_text(task, :title)
+      = f.text_field :subtitle, class: 'form-control', placeholder: 'Subtitle'
+      = validation_text(task, :subtitle)
 
-  .form-group
-    = f.label :subtitle, 'Sub-title'
-    = f.text_field :subtitle, class: 'form-control'
-    = validation_text(task, :subtitle)
+    .col-2
+      = f.label :priority
+      = f.select :priority, Task::PRIORITIES, { prompt: true }, class: 'form-control'
+      = validation_text(task, :priority)
 
-  .form-group
-    = f.label :due_date
-    = f.text_field :due_date, type: :date, class: 'form-control'
-    = validation_text(task, :due_date)
+    .col-2
+      = f.label :due_date
+      = f.text_field :due_date, type: :date, class: 'form-control'
+      = validation_text(task, :due_date)
 
-  .form-group
-    = f.label :priority
-    = f.select :priority, Task::PRIORITIES, { prompt: true }, class: 'form-control'
-    = validation_text(task, :priority)
-
-  = f.submit 'Save', class: 'btn btn-primary'
+  = f.submit 'Save', class: 'btn btn-primary align-right'
+  = link_to 'Cancel', tasks_path, class: 'btn btn-secondary'
