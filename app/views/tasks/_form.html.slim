@@ -1,6 +1,6 @@
 = form_with model: task do |f|
   .row
-    .col-7.offset-1
+    .col-5.offset-1
       = f.text_field :title, class: 'form-control', placeholder: 'Title'
       = validation_text(task, :title)
       = f.text_field :subtitle, class: 'form-control', placeholder: 'Subtitle'
@@ -11,10 +11,11 @@
       = f.select :priority, Task::PRIORITIES, { prompt: true }, class: 'form-control'
       = validation_text(task, :priority)
 
-    .col-2
+    .col-4
       = f.label :due_date
-      = f.text_field :due_date, type: :date, class: 'form-control'
+      = f.text_field :due_date, type: 'datetime-local', value: task.due_date&.strftime('%Y-%m-01T%H:%M'), class: 'form-control'
       = validation_text(task, :due_date)
 
-  = f.submit 'Save', class: 'btn btn-primary align-right'
-  = link_to 'Cancel', tasks_path, class: 'btn btn-secondary'
+  .float-right
+    = f.submit 'Save', class: 'btn btn-primary align-right'
+    = link_to 'Cancel', tasks_path, class: 'btn btn-secondary'

@@ -1,5 +1,7 @@
+.float-right
+  = link_to 'New Task', [:new, :task], data: { turbo_frame: dom_id(Task.new) }, class: 'btn btn-primary'
+
 h3 Tasks
-= link_to 'New Task', [:new, :task], data: { turbo_frame: dom_id(Task.new) }, class: 'btn btn-primary'
 
 = turbo_frame_tag Task.new
 

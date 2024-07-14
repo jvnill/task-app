@@ -1,20 +1,20 @@
 = turbo_frame_tag task do
-  .row data-controller='task' data-task-updated-url='#{task_path(task)}'
-    .col-1
+  .row.task-row data-controller='task' data-task-updated-url='#{task_path(task)}'
+    .col-1.task-checkbox
       = form_with model: task, url: [:finish, task], method: :put, data: { controller: 'task' } do |f|
-        = f.label :finished do
+        = f.label :finished, class: 'checkbox-input' do
           = f.check_box :finished, data: { action: 'task#finishTask' }
 
-    .col-6
+    .col-5.task-title
       h5 = task.title
       .text-secondary = task.subtitle
 
-    .col-2
+      .button-group
+        = link_to 'Edit', [:edit, task], method: :get, class: 'btn btn-primary'
+        = button_to 'Destroy', task, method: :delete, class: 'btn btn-danger'
+
+    .col-3.task-priority
       = priority_rendering(task.priority)
 
-    .col-2
-      = task.due_date
-
-    .col-1
-      = link_to 'Edit', [:edit, task], class: 'btn btn-primary'
-      = button_to 'Destroy', task, method: :delete, class: 'btn btn-danger'
+    .col-3.task-due-date
+      = due_date_rendering(task.due_date)
